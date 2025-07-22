@@ -1,6 +1,12 @@
 package com.mehmet.controller.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +18,7 @@ import com.mehmet.services.IStudentService;
 //Amacımız bu sınıftan oluşturulan nesnelerin referanslarını Interface sayesinde yakalayıp yönetebilmek. 
 
 @RestController
-@RequestMapping("/rest/api/student")
+@RequestMapping("/rest/api/students")
 
 public class StudentControllerImpl implements IStudentController {
 	
@@ -20,7 +26,7 @@ public class StudentControllerImpl implements IStudentController {
 	private IStudentService studentService;
 	
 	
-	@PostMapping(path = "/save")
+	@PostMapping()
 	@Override
 	public Student saveStudent(@RequestBody Student student) {
 		student=studentService.saveStudent(student);
@@ -28,6 +34,28 @@ public class StudentControllerImpl implements IStudentController {
 		return student;
 	}
 
+	@GetMapping()
+	@Override
+	public List<Student> getAllStudents() {
+		List<Student> getallStudents=studentService.getAllStudents();
+		return getallStudents;
+	}
+	
+	@GetMapping(path = "/{id}")
+	@Override
+	public Optional<Student> getStudentById(@PathVariable(name="id") Integer id) {
+		Optional<Student> student=studentService.getStudentById(id);
+		return student;
+	}
+
+	@DeleteMapping(path = "/{id}")
+	@Override
+	public Optional<Student> deleteStudentById(@PathVariable(name="id") Integer id) {
+		Optional<Student> student=studentService.deleteStudentById(id);
+		return student;
+	}
+
+	
 	
 	
 }
