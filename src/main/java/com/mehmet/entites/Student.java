@@ -2,6 +2,10 @@ package com.mehmet.entites;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +31,8 @@ public class Student {
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
-	@Column(name = "birt_of_date")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "birth_of_date")
 	private Date birthOfDate;
 	
 	

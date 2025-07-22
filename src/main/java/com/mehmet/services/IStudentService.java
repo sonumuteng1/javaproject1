@@ -1,5 +1,9 @@
 package com.mehmet.services;
 
-public interface IStudentService {
+import com.mehmet.entites.Student;
 
+public interface IStudentService {
+	
+	public Student saveStudent(Student student);
+	
 }
