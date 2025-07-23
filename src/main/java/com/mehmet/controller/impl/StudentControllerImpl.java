@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mehmet.controller.IStudentController;
+import com.mehmet.dto.DtoStudent;
+import com.mehmet.dto.DtoStudentIU;
 import com.mehmet.entites.Student;
 import com.mehmet.services.IStudentService;
 //Amacımız bu sınıftan oluşturulan nesnelerin referanslarını Interface sayesinde yakalayıp yönetebilmek. 
@@ -28,8 +30,9 @@ public class StudentControllerImpl implements IStudentController {
 	
 	@PostMapping()
 	@Override
-	public Student saveStudent(@RequestBody Student student) {
-		student=studentService.saveStudent(student);
+	public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
+		
+		DtoStudent student=studentService.saveStudent(dtoStudentIU);
 		
 		return student;
 	}
