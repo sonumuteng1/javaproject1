@@ -9,7 +9,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: build image
-        run: docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
+        run:  docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
       - name: push image to docker hub
         run: | 
          docker push mehmetemin123456789/spring-data-jpa:latest
