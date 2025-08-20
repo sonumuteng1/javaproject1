@@ -15,7 +15,7 @@ public class OpenApiConfig {
 	    return new OpenAPI()
 	        .info(new Info()
 	            .title("Springboot_Project1 Project OpenAPI Docs")
-	            .version("3.0.0")
+	            .version("4.0.0")
 	            .description("Doc Description"));
 	}
 
