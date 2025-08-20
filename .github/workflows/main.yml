@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
       - name: build image
         run:  docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
       - name: push image to docker hub
