@@ -1,15 +1,21 @@
-name: Test Workflow 2
+name: Build and publish image to Docker Hub
 
 on: push
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Print message
-        run: echo "Workflow çalıştı! ve Swagger güncellendi."
+	publish_images:
+		runs-on: ubuntu-latest
+		steps:
+			- name: checkout
+			  uses: actions/checkout@v4
+			- name: build image
+			  run: docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
+			- name: push image to docker hub
+			  run: | 
+			    docker push mehmetemin123456789/spring-data-jpa:latest
+			
+	
+		
+	
 
 
