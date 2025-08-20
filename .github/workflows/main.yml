@@ -13,7 +13,8 @@ jobs:
       - name: build image
         run:  docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
       - name: push image to docker hub
-        run: | 
+        run: |
+         docker login -u mehmetemin123456789 -p ${{secrets.DOCKER_HUB_TOKEN}}
          docker push mehmetemin123456789/spring-data-jpa:latest
 
 
