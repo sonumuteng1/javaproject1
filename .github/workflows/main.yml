@@ -1,20 +1,62 @@
+#name: Build and publish image to Docker Hub
+#
+#on: push
+#
+#jobs:
+#  publish_images:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v4
+#      - name: Build with Maven
+#        run: mvn clean package -DskipTests
+#      - name: build image
+#        run:  docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
+#      - name: push image to docker hub
+#        run: |
+#         docker login -u mehmetemin123456789 -p ${{secrets.DOCKER_HUB_TOKEN}}
+#         docker push mehmetemin123456789/spring-data-jpa:latest
+
+
 name: Build and publish image to Docker Hub
 
-on: push
+on:
+  push:
+    branches: [ "master" ]
 
 jobs:
-  publish_images:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v4
+
+      - name: run checkstyle
+        run: mvn -B clean checkstyle:check
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: quality         
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
       - name: Build with Maven
-        run: mvn clean package -DskipTests
-      - name: build image
-        run:  docker build ./ -t mehmetemin123456789/spring-data-jpa:latest
-      - name: push image to docker hub
-        run: |
-         docker login -u mehmetemin123456789 -p ${{secrets.DOCKER_HUB_TOKEN}}
-         docker push mehmetemin123456789/spring-data-jpa:latest
+        run: mvn -B clean package -DskipTests
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build image
+        run: docker build ./ -t ${{ secrets.DOCKERHUB_USERNAME }}/spring-data-jpa:latest .
+
+      - name: Push image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/spring-data-jpa:latest
 
 
+
+
+	
