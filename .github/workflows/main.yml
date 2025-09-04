@@ -22,7 +22,7 @@ name: Build and publish image to Docker Hub
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   quality:
