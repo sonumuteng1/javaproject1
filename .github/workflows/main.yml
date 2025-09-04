@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/spring-data-jpa:latest .
+        run: docker build -t mehmetemin123456789/spring-data-jpa:latest .
 
       - name: Push image to Docker Hub
         run: docker push mehmetemin123456789/spring-data-jpa:latest
